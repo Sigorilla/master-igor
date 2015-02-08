@@ -1,0 +1,83 @@
+.main a,
+.main a:hover, 
+.main a:active, 
+.main a.selected,
+.main a:visited { 
+  color: #0d97ff;
+}
+article, 
+div.inner {
+  max-width: 690px;
+}
+article > *,
+div.inner > * {
+  margin: 0;
+}
+.main table {
+  margin: 0;
+  width: 100%;
+}
+.main table tr > * {
+  vertical-align: middle;
+}
+.main td,
+.main td > * {
+  width: 220px;
+  height: 220px;
+}
+.main .utp {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: none;
+  border-radius: 100%;
+  background-color: #ecf0f1;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 150px;
+}
+.main .utp .info {
+  display: none;
+}
+.main .utp:hover .info {
+  /*display: inline-block;*/
+}
+
+/* all background-image */
+#blog {
+  background-color: #ecf0f1;
+}
+#blog:hover {
+  /*background-image: url(/static/images/vk.png);*/
+}
+#schedule {
+  background-color: #e74c3c;
+}
+#schedule:hover {
+  /*background-image: url(/static/images/vk.png);*/
+}
+#scrobbler {
+  background-color: #5f6d7c;
+}
+#scrobbler:hover {
+  /*background-image: url(/static/images/vk.png);*/
+}
+#vk {
+  background-color: #4e729a;
+}
+#vk:hover {
+  background-image: url(/static/images/vk.png);
+}
+#twitter {
+  background-color: #55acee;
+}
+#twitter:hover {
+  background-image: url(/static/images/twitter.png);
+}
+#email {
+  background-color: #16a085;
+}
+#email:hover {
+  background-image: url(/static/images/email.png);
+}
