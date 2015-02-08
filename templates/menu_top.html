@@ -1,0 +1,7 @@
+<ul class="menu">
+{% for el in menu %}
+  <li><a href="{{ el.link }}" {% if el.get_target_display %}
+    target="{{ el.get_target_display }}"
+  {% endif %}>{{ el.name }}</a></li>
+{% endfor %}
+</ul>

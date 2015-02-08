@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+  Server Error
+{% endblock title %}
+{% block page_title %}
+  <i class="fa fa-exclamation-triangle"></i> 500: Server Error
+{% endblock page_title %}
+
+{% block page %}
+  <article class="error" data-code="500">
+    <h2>Internal Server Error</h2>
+    <p class="intro">Something went wrong. Try reload page later.</p>
+  </article>
+{% endblock page %}

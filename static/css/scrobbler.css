@@ -1,0 +1,15 @@
+#main article.scrobbler img {
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 740px) {
+
+  #main article.scrobbler > table {
+    width: 94%;
+  }
+  #main article.scrobbler > img {
+    display: inherit;
+    width: inherit;
+  }
+
+}

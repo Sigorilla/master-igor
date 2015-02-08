@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block end_script %}
+  <link rel="stylesheet" href="{% static "css/scrobbler.css" %}">
+  <script src="{% static "js/scrobbler.js" %}"></script>
+{% endblock end_script %}
+
+
+{% block page %}
+
+  <article class="scrobbler_form">
+    <form id="change_name" class="col-md-8">
+      <div class="input-group input-group-lg">
+        <input id="new_nick" type="text" class="form-control" placeholder="Enter nick from Last.fm">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </form>
+  </article>
+
+  <article class="scrobbler">
+    <h2>Now playing</h2>
+    <table class="table table-hover table-bordered">
+      <col width="20%">
+      <tr>
+        <td class="text-right"><span id="label_nick"><strong>User</strong></span></td>
+        <td><span id="nick">{{ track.nick }}</span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><span id="label_name"><strong>Track</strong></span></td>
+        <td><a href="{{ track.url }}" id="name" target="_blank">{{ track.name }}</a></td>
+      </tr>
+      <tr>
+        <td class="text-right"><span id="label_artist"><strong>Artist</strong></span></td>
+        <td><span id="artist">{{ track.artist }}</span></td>
+      </tr>
+    </table>
+    <div>
+      <img src="http://screenshots.en.sftcdn.net/blog/en/2012/10/10-15-2012-2-22-52-PM-300x300.png" alt="Image" id="img" class="img-circle">
+    </div>
+  </article>
+
+{% endblock page %}
