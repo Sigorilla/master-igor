@@ -19,10 +19,10 @@
     <link rel="icon" type="image/x-icon" href="{% static "images/favicon.png" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-    <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/base.css" %}?v=0.0.1">
     <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-    <script src="{% static "js/base.js" %}"></script>
+    <script src="{% static "js/base.js" %}?v=0.0.3"></script>
     {% block end_script %} {% endblock end_script %}
     {% block head_script %}{% endblock head_script %}
   </head>
@@ -39,13 +39,16 @@
   </div>
 </nav>
 
+{% block header %}
 <header id="header">
   <div class="inner">
     <h1>{% block page_title %} <i class="fa fa-{{ fa|default:'coffee' }}"></i> {{ page_title|default:"Igor Stepanov" }} {% endblock page_title %}</h1>
   </div>
 </header>
+{% endblock header %}
 
-<main id="main">
+
+<div id="main">
   {% block page %}
     <article class="base post detail">
       <p class="intro">На этой странице показаны все реализованные элементы. Список содержания создается автоматически, прямо в браузере, поэтому не отключайте JavaScript. Так же <code>&lt;h5&gt;</code> и <code>&lt;h6&gt;</code> будут преобразованы в <code>&lt;h4&gt;</code>, а <code>&lt;h1&gt;</code> в <code>&lt;h2&gt;</code></p>
@@ -109,12 +112,20 @@
       <p class="pub_date">Aug. 18, 2014, 12:50 p.m.</p>
     </article>
   {% endblock page %}
-</main>
+</div>
 
 <footer id="footer">
   <div class="inner">
   {% block footer %}
-    <div><button onclick="window.print();" class="btn btn-default btn-sm" title="Print this page"><i class="fa fa-print"></i></button> &copy; 2012&ndash;{% now "Y" %}</div>
+    <div>
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" data-fire="totop" title="Go to Top">
+          <i class="fa fa-arrow-up"></i>
+        </button>
+        <button class="btn btn-default" data-fire="print" title="Print this page">
+          <i class="fa fa-print"></i>
+        </button>
+      </div> &copy; 2012&ndash;{% now "Y" %}</div>
     <div>Igor Stepanov = <code>[
       <a href="//vk.com/sigorilla" target="_blank">vk</a>, 
       <a href="//twitter.com/sigorillo" target="_blank">twitter</a>,

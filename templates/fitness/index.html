@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_script %}
+<script src="{% static "js/training.js" %}?v=1.8.4"></script>
+<link rel="stylesheet" href="{% static "css/training.css" %}?v=1.4">
+{% endblock head_script %}
+
+{% block page %}
+<table class="table table-hover table-bordered" id="fitTable">
+  <thead>
+    <tr>
+      <th width="300px">Exercise</th>
+      {% for day in day_list %}
+        <th width="220px" data-day-id="{{ day.id }}">{{ day.datetime|date:"d E" }}</th>
+      {% endfor %}
+      <th><button class="btn btn-default btn-lg" id="btnAddDay"><i class="fa fa-plus-square-o"></i></button></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for exercise, trainings in objects.items %}
+    <tr>
+    <th data-exercise-id="{{ exercise.id }}">{{ exercise }}</th>
+    {% for training in trainings %}
+      <td data-training-id="{{ training.id }}" data-date="{{ training.day.datetime|date:"d E" }}" data-count="{{ training.getResults.count }}">
+        <div class="row">
+          {% for approach in training.getResults.items %}
+            <div class="col-xs-3 approach">
+              <span class="weight">{{ approach.weight }}</span>
+              <br>
+              <span class="times">{{ approach.times }}</span>
+              </div>
+          {% endfor %}
+        </div>
+      </td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if user.is_authenticated %}
+
+<div class="modal fade" id="settings">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Подтягивания <small>24 февраля</small></h4>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-1">
+            Подход 1
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-weight">
+              <div class="input-group-addon">кг</div>
+            </div>
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-times">
+              <div class="input-group-addon">раз</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-1">
+            Подход 2
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-weight">
+              <div class="input-group-addon">кг</div>
+            </div>
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-times">
+              <div class="input-group-addon">раз</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-1">
+            Подход 3
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-weight">
+              <div class="input-group-addon">кг</div>
+            </div>
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-times">
+              <div class="input-group-addon">раз</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3 col-xs-offset-1">
+            Подход 4
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-weight">
+              <div class="input-group-addon">кг</div>
+            </div>
+          </div>
+          <div class="col-xs-3 form-group">
+            <div class="input-group">
+              <input type="number" class="form-control input-times">
+              <div class="input-group-addon">раз</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hidden">
+          <input type="hidden" class="hidden" name="training">
+          <input type="hidden" class="hidden" name="exercise">
+          <input type="hidden" class="hidden" name="day">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveSettings">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="addDay">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Добавить дату <small></small></h4>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+          <div class="col-xs-5 col-xs-offset-1 form-group">
+            <div class="input-group">
+              <div class="input-group-addon">Дата</div>
+              <input type="date" class="form-control input-date">
+            </div>
+          </div>
+          <div class="col-xs-5 form-group">
+            <div class="input-group">
+              <div class="input-group-addon">Время</div>
+              <input type="time" class="form-control input-time">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveDay">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% else %}
+<div class="modal fade no_auth" id="settings">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Sorry <small></small></h4>
+      </div>
+
+      <div class="modal-body">
+        <p>You're not authenticated!</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endif %}
+{% endblock page %}

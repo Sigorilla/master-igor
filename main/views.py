@@ -13,6 +13,13 @@ def home(request):
   }
   return render(request, 'index.html', obj)
 
+def gsoc(request):
+  obj = {
+    'fa': 'code',
+    'page_title': 'Google Summer of Code 2015',
+  }
+  return render(request, 'gsoc15.html', obj)
+
 def about(request):
   obj = {
     'fa': 'user',

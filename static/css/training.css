@@ -1,0 +1,9 @@
+table#fitTable {
+  width: auto;
+}
+table#fitTable td {
+  cursor: pointer;
+}
+table#fitTable .approach {
+  white-space: nowrap;
+}
