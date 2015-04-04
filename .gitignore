@@ -1,0 +1,7 @@
+*.pyc
+*.sqlite3
+*.sublime-*
+*/migrations/*
+*/findme/*
+findme*
+settings.py

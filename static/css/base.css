@@ -21,15 +21,18 @@ body {
   word-wrap: break-word;
   overflow-y: scroll;
 }
+*:focus { outline: none; }
 a, 
 a:hover,
 a:active,
+a:focus,
 a:visited {
   color: #0d97ff;
   text-decoration: none;
 }
 a:hover,
 a:active,
+a:focus,
 a.selected {
   color: #008af3;
   border-bottom: 1px solid;

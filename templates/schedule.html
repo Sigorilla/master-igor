@@ -32,27 +32,27 @@
       </tr>
       <tr>
         <td class="time" rowspan="2">9 <sup>00</sup> : 10 <sup>25</sup></td>
-        <td class="lect" rowspan="2">
-          <span>Основы цифр. электроники</span>
-          <span class="prep">Ларин А.П.</span>
-          <span class="room">115 КПМ</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Основы цифр. электроники</span>
+          <span class="prep hidden">Ларин А.Л.</span>
+          <span class="room hidden">115 КПМ</span>
         </td>
-        <td class="lect" rowspan="2">
-          <span>Теоретическая физика</span>
-          <span class="prep">Суханов Л.П.</span>
-          <span class="room">117 ГК</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Теоретическая физика</span>
+          <span class="prep hidden">Суханов Л.П.</span>
+          <span class="room hidden">117 ГК</span>
         </td>
-        <td class="lect" rowspan="2">
-          <span>Вычисл. математика</span>
-          <span class="prep">Барабанщиков А.В.</span>
-          <span class="room">115 КПМ</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Вычисл. математика</span>
+          <span class="prep hidden">Барабанщиков А.В.</span>
+          <span class="room hidden">115 КПМ</span>
         </td>
         <td class="empty" rowspan="14">
           <span>Базовый день</span>
         </td>
         <td class="sem" rowspan="2">
           <span>Теоретическая физика</span>
-          <span class="prep"></span>
+          <span class="prep">Манько В.И.</span>
           <span class="room">511 ГК</span>
         </td>
         {# <td class="empty"></td> #}
@@ -78,15 +78,15 @@
       </tr>
       <tr>
         <td class="time" rowspan="2">12 <sup>20</sup> : 13 <sup>45</sup></td>
-        <td class="lect" rowspan="2">
-          <span>Диск. случ. процессы</span>
-          <span class="prep">Шамаров Н.Н.</span>
-          <span class="room">123 ГК</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Диск. случ. процессы</span>
+          <span class="prep hidden">Шамаров Н.Н.</span>
+          <span class="room hidden">123 ГК</span>
         </td>
-        <td class="lect" rowspan="3">
-          <span>Уравнения матфизики</span>
-          <span class="prep">Боговский М.Е.</span>
-          <span class="room">239 НК</span>
+        <td class="empty" rowspan="3">
+          <span class="hidden">Уравнения матфизики</span>
+          <span class="prep hidden">Боговский М.Е.</span>
+          <span class="room hidden">239 НК</span>
         </td>
         <td class="empty" rowspan="2"></td>
         {# <td class="empty"></td> #}
@@ -100,16 +100,16 @@
       </tr>
       <tr>
         <td class="time" rowspan="2">13 <sup>55</sup> : 15 <sup>20</sup></td>
-        <td class="sem" rowspan="2">
-          <span>Диск. случ. процессы</span>
-          <span class="prep">Шамаров Н.Н.</span>
-          <span class="room">123 ГК</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Диск. случ. процессы</span>
+          <span class="prep hidden">Шамаров Н.Н.</span>
+          <span class="room hidden">123 ГК</span>
         </td>
         {# <td class="empty"></td> #}
-        <td class="lect" rowspan="2">
-          <span>Диск. преобр. сигналов</span>
-          <span class="prep">Романюк Ю.А.</span>
-          <span class="room">110 КПМ</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Диск. преобр. сигналов</span>
+          <span class="prep hidden">Романюк Ю.А.</span>
+          <span class="room hidden">110 КПМ</span>
         </td>
         {# <td class="empty"></td> #}
         {# <td class="empty"></td> #}
@@ -119,7 +119,7 @@
         {# Double line #}
         <td class="sem" rowspan="3">
           <span>Уравнения матфизики</span>
-          <span class="prep">-</span>
+          <span class="prep">Амосов Г.Г.</span>
           <span class="room">516а ГК</span>
         </td>
       </tr>
@@ -132,8 +132,8 @@
         </td>
         {# <td class="empty"></td> #}
         <td class="sem" rowspan="2">
-          <span>Выч. математика</span>
-          <span class="prep"></span>
+          <span>Вычисл. математика</span>
+          <span class="prep">Петров М.</span>
           <span class="room">705 КПМ</span>
         </td>
         {# <td class="empty"></td> #}
@@ -145,20 +145,15 @@
         <td class="time" rowspan="2">17 <sup>05</sup> : 18 <sup>30</sup></td>
         <td class="other" rowspan="4">
           <span>Лаборатория основ цифровой электроники</span>
-          <span class="prep"></span>
-          <span class="room"></span>
+          <span class="prep">Ларин А.Л.</span>
+          <span class="room">201 РТ</span>
         </td>
         <td class="empty" rowspan="2"></td>
-        {% if curr_week %} 
-        {# Нечетная #}
-        <td class="lect" rowspan="2">
-          <span>Параллельное прогр.</span>
-          <span class="prep">Якобовский М.В.</span>
-          <span class="room">Б. Хим</span>
+        <td class="empty" rowspan="2">
+          <span class="hidden">Параллельное прогр.</span>
+          <span class="prep hidden">Якобовский М.В.</span>
+          <span class="room hidden">Б. Хим</span>
         </td>
-        {% else %}
-        <td class="empty" rowspan="2"></td>
-        {% endif %}
         {# <td class="empty"></td> #}
         <td class="other" rowspan="2">
           <span>Физкультура</span>

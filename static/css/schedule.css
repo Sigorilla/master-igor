@@ -39,7 +39,23 @@ article.schedule .sem {
   background-color: rgba(204, 255, 255, 0.213);
 }
 #main, article {
-  overflow: visible;
+  overflow: visible !important;
+}
+.prep:before,
+.room:before {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
+  padding-right: 10px;
+}
+.prep:before { content: "\f007"; /* fa-user */ }
+.room:before { content: "\f061"; /* fa-user */ }
+
+.not {
+  opacity: 0.4;
 }
 
 /* Print */
