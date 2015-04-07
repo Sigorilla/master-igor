@@ -1,0 +1,3 @@
+[submodule "mipt_hack_server"]
+	path = mipt_hack_server
+	url = https://github.com/banditi/mipt_hack_server
