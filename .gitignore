@@ -7,3 +7,4 @@
 findme*
 settings.py
 *.key
+.idea/
