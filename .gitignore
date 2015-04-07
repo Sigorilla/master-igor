@@ -3,8 +3,6 @@
 *.db
 *.sublime-*
 */migrations/*
-*/findme/*
-findme*
 settings.py
 *.key
 .idea/
