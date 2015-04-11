@@ -17,7 +17,7 @@ urlpatterns = patterns('',
 
   url(r'^findme/', include('findme.urls')),
   url(r'^fitness/', include('fitness.urls')),
-  url(r'^test/', include('mipt_hack_server.urls', namespace="mipt")),
+  url(r'^joinme/', include('joinme.urls', namespace="mipt")),
 )
 
 handler404 = 'main.views.handler404'

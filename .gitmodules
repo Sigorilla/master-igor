@@ -1,6 +1,6 @@
-[submodule "mipt_hack_server"]
-	path = mipt_hack_server
-	url = https://github.com/banditi/mipt_hack_server
+[submodule "joinme"]
+	path = joinme
+	url = https://github.com/banditi/joinme
 [submodule "findme"]
 	path = findme
 	url = https://github.com/banditi/findme
