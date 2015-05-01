@@ -9,7 +9,7 @@ from datetime import datetime
 
 def home(request):
   obj = {
-    'page_title': 'Master-Igor.com',
+    'page_title': 'Igor Stepanov',
   }
   return render(request, 'index.html', obj)
 
