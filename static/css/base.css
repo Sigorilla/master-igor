@@ -40,7 +40,7 @@ a.selected {
 h2:target,
 h3:target,
 h4:target { color: #0d97ff; }
-h2 > a { display: block; }
+/*h2 > a { display: block; }*/
 h2 > a:hover { border: none; }
 
 h1, h2, h3, h4, h5, h6 {
@@ -119,11 +119,14 @@ article,
 div.inner {
   position: relative;
   display: block;
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
   background-color: #fff;
+}
+article[class^=post] {
+  /*border-bottom: 1px solid #eee;*/
 }
 article > *:not(h2),
 div.inner > *:not(h2),
@@ -208,25 +211,27 @@ nav ul.menu > li[data-submenu="yes"]:hover > a {
   border-bottom: 1px solid;
 }
 
-article > h2.post_title {
+article > h2.post-title {
   margin-bottom: .2em;
 }
-article > h2.post_title:hover {
+article > h2.post-title:hover {
   background-color: #ddd;
 }
 article > p.pub_date {
+  border-top: 1px solid #eee;
   margin-bottom: 2em;
 }
 article p.intro {
   font-size: 1.2em;
   letter-spacing: .01em;
-  padding-bottom: 1em;
+  margin-top: 1em;
   text-align: justify;
 }
 article p.intro:only-child {
   padding-bottom: 0;
 }
 article.detail p.intro {
+  padding-bottom: 1em;
   border-bottom: 1px solid #eee;
 }
 p.pub_date {

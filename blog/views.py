@@ -1,79 +1,97 @@
 # -*- coding: utf-8 -*-
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post
-from taggit.models import Tag
 import pytz
 from django.views.decorators.cache import never_cache
+from django.contrib.auth.decorators import login_required
+from django.views import generic
+
 import collections
 from datetime import datetime, date
 
-def index(request, page=1):
-  posts_list = Post.objects.all().order_by('-pub_date')
-  paginator = Paginator(posts_list, 10)
+from blog.models import Post
+from blog.forms import *
+from taggit.models import Tag
 
-  # page = request.GET.get('page')
-  try:
-    posts_list = paginator.page(page)
-  except PageNotAnInteger:
-    posts_list = paginator.page(1)
-  except EmptyPage:
-    posts_list = paginator.page(paginator.num_pages)
-  context = {
-    'posts': posts_list,
-    'page_title': 'Blog',
-  }
-  return render(request, 'blog/index.html', context)
 
-def detail(request, post_id=1):
-  post_id = int(post_id)
-  # print post_id
-  post = get_object_or_404(Post, pk=post_id)
-  try:
-    prev = Post.objects.get(pk=post_id-1)
-  except Post.DoesNotExist:
-    prev = False
-  try:
-    next = Post.objects.get(pk=post_id+1)
-  except Post.DoesNotExist:
-    next = False
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view, login_url=reverse_lazy("blog:index"))
 
-  obj = {
-    'post': post,
-    'prev': prev,
-    'next': next,
-    'page_title': post.title,
-  }
-  return render(request, 'blog/detail.html', obj)
+
+class NeverCacheMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(NeverCacheMixin, cls).as_view(**initkwargs)
+        return never_cache(view)
+
+
+class BlogList(NeverCacheMixin, generic.ListView):
+    model = Post
+    template_name = "blog/index.html"
+    context_object_name = "posts"
+    paginate_by = 2
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogList, self).get_context_data(**kwargs)
+        context['page_title'] = 'Blog'
+        return context
+
+
+class PostView(NeverCacheMixin, generic.DetailView):
+    model = Post
+    template_name = 'blog/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PostView, self).get_context_data(**kwargs)
+        context['page_title'] = self.get_object().title
+        return context
+
+
+class PostCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Post
+    form_class = PostCreateForm
+    template_name_suffix = '_create_form'
+
+
+class PostEditView(LoginRequiredMixin, generic.UpdateView):
+    model = Post
+    form_class = PostCreateForm
+    template_name_suffix = '_create_form'
+
+
+class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Post
+    success_url = reverse_lazy('blog:index')
 
 @never_cache
 def archive(request):
-  post = Post.objects.all().order_by('-pub_date')
-  archive = list()
-  for item in post:
-    archive.append({
-      'post': item, 
-      'year': item.pub_date.date().year,
-    })
+    post = Post.objects.all().order_by('-pub_date')
+    archive = list()
+    for item in post:
+        archive.append({
+            'post': item, 
+            'year': item.pub_date.date().year,
+        })
 
-  obj = {
-    'archive': archive,
-    'page_title': "Archive",
-  }
-  return render(request, 'blog/archive.html', obj)
+    obj = {
+        'archive': archive,
+        'page_title': "Archive",
+    }
+    return render(request, 'blog/archive.html', obj)
 
-def tags(request):
-  tags = Tag.objects.all()
-  obj = {
-    'tags': tags,
-    'page_title': "Tags",
-  }
-  return render(request, 'blog/tags.html', obj)
+class TagList(NeverCacheMixin, generic.ListView):
+    model = Tag
+    template_name = "blog/tags.html"
+    context_object_name = "tags"
 
 def tag(request, slug=""):
-  posts = Post.objects.filter(tags__slug=slug).order_by('-pub_date')
-  obj = {
-    'posts': posts,
-    'page_title': slug,
-  }
-  return render(request, 'blog/tag.html', obj)
+    posts = Post.objects.filter(tags__slug=slug).order_by('-pub_date')
+    obj = {
+        'posts': posts,
+        'page_title': slug,
+    }
+    return render(request, 'blog/tag.html', obj)

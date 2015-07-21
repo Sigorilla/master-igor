@@ -23,6 +23,7 @@
       <p class="pub_date">{{ post.pub_date }}</p>
     </article>
     {# TODO:: prev and next #}
+    {% comment %}
     <article class="prev_next">
       {% if prev %}
         <p class="left">
@@ -35,6 +36,7 @@
         </p>
       {% endif %}
     </article>
+    {% endcomment %}
   {% else %}
     <article class="warning">
       <h2>Ошибка</h2>
