@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block page %}
+  <article class="tag_list">
+     <ul>
+    {% for tag in tags %}
+        <li><a href="{% url 'blog:tag' tag.slug %}">{{ tag.name }}</a> ({{ tag.taggit_taggeditem_items.all.count }})</li>
+    {% empty %}
+    </ul>
+    <h2>Warning</h2>
+    <p class="intro">No tags are available.</p>
+    {% endfor %}
+  </article>
+{% endblock page %}

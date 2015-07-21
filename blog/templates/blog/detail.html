@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% if user.is_authenticated %}
+  {% block head_script %}
+    <script src="{% static "js/tag.js" %}"></script>
+  {% endblock head_script %}
+{% endif %}
+
+{% block page %}
+  {% if post %}
+    <article class="post detail" id="post_{{ post.id }}">
+      <p class="intro">{{ post.intro }}</p>
+      {{ post.post|safe }}
+      {% if post.tags.all %}
+      <p class="tags"><code>[
+        {% for tag in post.tags.all %}
+        <a href="{% url 'blog:tag' tag.slug %}">{{ tag }}</a>, 
+        {% endfor %}
+      ]</code></p>
+      {% endif %}
+      <p class="pub_date">{{ post.pub_date }}</p>
+    </article>
+    {# TODO:: prev and next #}
+    <article class="prev_next">
+      {% if prev %}
+        <p class="left">
+          <a href="{% url 'blog:detail' prev.id %}"> << {{ prev.title }}</a>
+        </p>
+      {% endif %}
+      {% if next %}
+        <p class="right">
+          <a href="{% url 'blog:detail' next.id %}">{{ next.title }} >> </a>
+        </p>
+      {% endif %}
+    </article>
+  {% else %}
+    <article class="warning">
+      <h2>Ошибка</h2>
+      <p>Нет доступных записей.</p>
+    </article>
+  {% endif %}
+{% endblock page %}

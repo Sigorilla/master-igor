@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page %}
+
+{% regroup archive|dictsortreversed:"year" by year as by_year %}
+
+{% for year in by_year %}
+<article class="archive" data-year="">
+  <h2>{{ year.grouper }}</h2>
+  <ul>
+  {% for post in year.list %}
+    <li>
+      <span>{{ post.post.pub_date|date:"d.m.Y" }}</span>
+      <a href="{% url 'blog:detail' post.post.id %}">{{ post.post.title }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+</article>
+{% empty %}
+  <article class="warning">
+    <h2>Ошибка</h2>
+    <p>Нет доступных записей.</p>
+  </article>
+{% endfor %}
+
+{% endblock page %}
