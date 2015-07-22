@@ -20,7 +20,13 @@
         {% endfor %}
       ]</code></p>
       {% endif %}
-      <p class="pub_date">{{ post.pub_date }}</p>
+      <p class="pub_date">
+        {% if user.is_staff %}
+        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
+        <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-remove"></i></a>
+        {% endif %}
+        {{ post.pub_date }}
+      </p>
     </article>
     {# TODO:: prev and next #}
     {% comment %}

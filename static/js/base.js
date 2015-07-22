@@ -23,8 +23,8 @@ $(document).ready(function () {
   var $root1, $root2, $root3;
   $(".detail h2, .detail h3, .detail h4").each(function (index, element) {
     var name = $(element).prop("tagName"),
-        curr = $(element).text();
-        link = curr.toLowerCase().replace(" ", "-");
+        curr = $(element).text(),
+        link = curr.toLowerCase().replace(" ", "-"),
         text = "";
     $(element).attr("id", link);
     link = "#" + link;
@@ -48,6 +48,7 @@ $(document).ready(function () {
       if ($root2) {
         $h3 = $("<li><a href='" + link + "'>" + curr + "</a></li>").appendTo($root2);
       }
+      headings["H4"] = 0;
     }
     if (name == "H4") {
       headings[name] += 1;

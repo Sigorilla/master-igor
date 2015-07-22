@@ -88,6 +88,11 @@ class TagList(NeverCacheMixin, generic.ListView):
     template_name = "blog/tags.html"
     context_object_name = "tags"
 
+    def get_context_data(self, **kwargs):
+        context = super(TagList, self).get_context_data(**kwargs)
+        context['page_title'] = 'Tags'
+        return context
+
 def tag(request, slug=""):
     posts = Post.objects.filter(tags__slug=slug).order_by('-pub_date')
     obj = {

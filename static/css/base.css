@@ -251,6 +251,14 @@ article.detail p.pub_date {
 article.post {
   margin-bottom: 1.4em;
 }
+article.post img {
+  display: block;
+  margin: 0 auto;
+}
+article.post label[for=img] {
+  display: block;
+  text-align: center;
+}
 ol.nav {
   /*padding-top: 1em;*/
   /*border-top: 2px solid #eee;*/
