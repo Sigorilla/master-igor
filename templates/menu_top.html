@@ -1,7 +1,19 @@
 <ul class="menu">
 {% for el in menu %}
-  <li><a href="{{ el.link }}" {% if el.get_target_display %}
+  <li {% if el.has_subitems %}
+    data-submenu="yes"
+  {% endif %} ><a href="{{ el.link }}" {% if el.get_target_display %}
     target="{{ el.get_target_display }}"
-  {% endif %}>{{ el.name }}</a></li>
+  {% endif %}>{{ el.name }}</a>
+  {% if el.has_subitems %}
+    <ul class="submenu">
+    {% for subel in el.subitems.all %}
+      <li><a href="{{ subel.link }}" {% if el.get_target_display %}
+        target="{{ subel.get_target_display }}"
+      {% endif %}>{{ subel.name }}</a></li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </li>
 {% endfor %}
 </ul>

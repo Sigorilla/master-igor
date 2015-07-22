@@ -3,14 +3,18 @@ from django.db import models
 class Menu(models.Model):
 
   class Meta:
-    verbose_name = "Menu"
-    verbose_name_plural = "Menus"
+    verbose_name = 'Menu'
+    verbose_name_plural = 'Menus'
+    ordering = ['sort']
 
   def __str__(self):
     return self.name
 
   def __unicode__(self):
     return self.name
+
+  def has_subitems(self):
+    return self.subitems.count() > 0
 
   TARGET_CHOICES = (
     ('EM', ''),
@@ -26,6 +30,8 @@ class Menu(models.Model):
                             choices=TARGET_CHOICES,
                             default='EM')
   sort = models.PositiveIntegerField(default=100)
+  level = models.IntegerField(default=0)
+  subitems = models.ManyToManyField('self', blank=True)
 
   def is_active(self):
     return self.sort > 0
