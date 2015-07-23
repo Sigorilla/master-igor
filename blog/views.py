@@ -48,6 +48,7 @@ class PostView(NeverCacheMixin, generic.DetailView):
         return context
 
 
+# TODO:: create post without publications
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
     model = Post
     form_class = PostCreateForm

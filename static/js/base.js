@@ -98,6 +98,8 @@ $(document).ready(function () {
     }
   });
 
+  $('table').addClass('table table-bordered').find('caption').addClass('text-center');
+
   // $("body").css("margin-bottom", $("footer").outerHeight());
 });
 
