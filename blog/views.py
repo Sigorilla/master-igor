@@ -121,7 +121,7 @@ def tag(request, slug=""):
     return render(request, 'blog/tag.html', obj)
 
 
-class SearchList(LoginRequiredMixin, generic.ListView):
+class SearchList(NeverCacheMixin, LoginRequiredMixin, generic.ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'posts'
