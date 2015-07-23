@@ -28,4 +28,11 @@
     <h2>403: forbidden...</h2>
     {% endif %}
 </div>
+<script>
+    CKEDITOR.replace( 'id_post' );
+
+    /*$(window).on('beforeunload', function () {
+        return 'Are you sure you want to leave this page?  You will lose any unsaved data.';
+    });*/
+</script>
 {% endblock page %}

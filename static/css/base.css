@@ -41,7 +41,9 @@ h2:target,
 h3:target,
 h4:target { color: #0d97ff; }
 /*h2 > a { display: block; }*/
-h2 > a:hover { border: none; }
+h2 > a:hover, h2 > a:active, h2 > a:focus,
+h3 > a:hover, h3 > a:active, h3 > a:focus,
+h4 > a:hover, h4 > a:active, h4 > a:focus { border: none; }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.1em; 
@@ -296,6 +298,9 @@ article.tag_detail ul span {
     display: none;
   }
   .pub_date a {
+    display: none;
+  }
+  .tags {
     display: none;
   }
 }

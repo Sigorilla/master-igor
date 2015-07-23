@@ -13,7 +13,7 @@
     <article class="post detail" id="post_{{ post.id }}">
       <div>
       <p class="intro">{{ post.intro }}</p>
-      <p>{{ post.post|safe }}</p>
+      {{ post.post|safe }}
       </div>
       {% if post.tags.all %}
       <p class="tags">

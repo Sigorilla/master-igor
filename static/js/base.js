@@ -24,7 +24,7 @@ $(document).ready(function () {
   $(".detail h2, .detail h3, .detail h4").each(function (index, element) {
     var name = $(element).prop("tagName"),
         curr = $(element).text(),
-        link = curr.toLowerCase().replace(" ", "-"),
+        link = curr.toLowerCase().replace(/([ \W])/g, '-').replace(/-+$/gm, ''),
         text = "";
     $(element).attr("id", link);
     link = "#" + link;
@@ -91,9 +91,11 @@ $(document).ready(function () {
 
   $('#search').on('keyup', function () {
     var q = $(this).val();
-    $(this).parents('.modal-content').find('.modal-body').remove();
-    $(this).parents('.modal-content').append('<div class="modal-body"><div id="searchResults"></div></div>');
-    $('#searchResults').html('&nbsp;').load( $(this).parents('form').attr('action') + '?q=' + q );
+    if (q != '') {
+      $(this).parents('.modal-content').find('.modal-body').remove();
+      $(this).parents('.modal-content').append('<div class="modal-body"><div id="searchResults"></div></div>');
+      $('#searchResults').html('&nbsp;').load( $(this).parents('form').attr('action') + '?q=' + q );
+    }
   });
 
   // $("body").css("margin-bottom", $("footer").outerHeight());
