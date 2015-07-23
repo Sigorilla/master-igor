@@ -11,21 +11,25 @@
 {% block page %}
   {% if post %}
     <article class="post detail" id="post_{{ post.id }}">
+      <div>
       <p class="intro">{{ post.intro }}</p>
-      {{ post.post|safe }}
+      <p>{{ post.post|safe }}</p>
+      </div>
       {% if post.tags.all %}
-      <p class="tags"><code>[
+      <p class="tags">
+        {# <code>[ #}
         {% for tag in post.tags.all %}
-        <a href="{% url 'blog:tag' tag.slug %}">{{ tag }}</a>, 
+        <a href="{% url 'blog:tag' tag.slug %}" class="btn btn-default btn-xs">{{ tag }}</a>
         {% endfor %}
-      ]</code></p>
+        {# ]</code> #}
+      </p>
       {% endif %}
       <p class="pub_date">
         {% if user.is_staff %}
         <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
-        <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-remove"></i></a>
+        <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
         {% endif %}
-        {{ post.pub_date }}
+        {{ post.pub_date|date:"j.m.Y H:i" }}
       </p>
     </article>
     {# TODO:: prev and next #}
@@ -45,8 +49,8 @@
     {% endcomment %}
   {% else %}
     <article class="warning">
-      <h2>Ошибка</h2>
-      <p>Нет доступных записей.</p>
+      <h2>Warning</h2>
+      <p class="intro">Nothing is found.</p>
     </article>
   {% endif %}
 {% endblock page %}

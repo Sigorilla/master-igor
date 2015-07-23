@@ -4,6 +4,7 @@ from blog import views
 urlpatterns = patterns('',
     url(r'^$', views.BlogList.as_view(), name='index'),
     # url(r'^(?P<page>\d+)/$', views.index, name='page'),
+    url(r'^search/$', views.SearchList.as_view(), name='search'),
     url(r'^post/$', views.PostCreateView.as_view(), name='create'),
     url(r'^post/(?P<pk>\d+)/$', views.PostView.as_view(), name='detail'),
     url(r'^post/(?P<pk>\d+)/edit/$', views.PostEditView.as_view(), name='edit'),

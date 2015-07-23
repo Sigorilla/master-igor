@@ -67,7 +67,7 @@ $(document).ready(function () {
   });
 
   // Replace double normal dashes to one long dash
-  $("main :contains('--')").each(function () {
+  $("main :contains('--'), #main :contains('--')").each(function () {
     $(this).html($(this).html().replace(new RegExp('--','g'), "&mdash;"));
   });
 
@@ -80,6 +80,20 @@ $(document).ready(function () {
     if (fire == 'print') {
       window.print();
     }
+    if (fire == 'search') {
+      open_search();
+    }
+  });
+
+  $('#searchModal').on('shown.bs.modal', function () {
+    $(this).find('input#search').focus();
+  });
+
+  $('#search').on('keyup', function () {
+    var q = $(this).val();
+    $(this).parents('.modal-content').find('.modal-body').remove();
+    $(this).parents('.modal-content').append('<div class="modal-body"><div id="searchResults"></div></div>');
+    $('#searchResults').html('&nbsp;').load( $(this).parents('form').attr('action') + '?q=' + q );
   });
 
   // $("body").css("margin-bottom", $("footer").outerHeight());

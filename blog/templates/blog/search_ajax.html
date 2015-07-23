@@ -1,0 +1,18 @@
+{% if posts %}
+  <h2>Results</h2>
+  {% for post in posts %}
+    <h3 class="post-title">
+      <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
+    </h3>
+  {% endfor %}
+  {% if posts|length > 5 %}
+    <div class="text-right">
+      <a href="{% url 'blog:search' %}?q={{ query }}&page=2">More results</a>
+    </div>
+  {% endif %}
+{% else %}
+<article class="warning">
+  <h2>Warning</h2>
+  <p class="intro">Nothing is found.</p>
+</article>
+{% endif %}

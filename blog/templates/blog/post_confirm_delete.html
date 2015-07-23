@@ -8,12 +8,12 @@
         {% csrf_token %}
         <div class="lead">Are you sure want to delete post &laquo;{{ object.title }}&raquo;?</div>
         <div class="btn-group" role="group">
-            <button class="btn btn-danger">Delete <i class="fa fa-delete"></i></button>
+            <button class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
             <a href="{% url 'blog:detail' object.pk %}" class="btn btn-default">Back</a>
         </div>
     </form>
     {% else %}
-    403: forbidden...
+    <h2>403: forbidden...</h2>
     {% endif %}
 </div>
 {% endblock page %}

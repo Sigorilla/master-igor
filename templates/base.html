@@ -19,15 +19,39 @@
     <link rel="icon" type="image/x-icon" href="{% static "images/favicon.png" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-    <link rel="stylesheet" href="{% static "css/base.css" %}?v=0.0.2">
+    <link rel="stylesheet" href="{% static "css/base.css" %}?v=0.1.0">
     <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-    <script src="{% static "js/base.js" %}?v=0.0.4"></script>
+    <script src="{% static "js/base.js" %}?v=0.1.0"></script>
     {% block end_script %} {% endblock end_script %}
     {% block head_script %}{% endblock head_script %}
   </head>
 {% endblock head %}
 <body>
+
+{% block search %}
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+  <div class="modal-dialog modal-lg modal-search" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <form action="{% url 'blog:search' %}">
+          <div class="input-group">
+            <input id="search" type="text" name="q" class="input-search" placeholder="Search..." autocomplete="off">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="fa fa-search"></i>
+              </button>
+              <button class="btn btn-default" data-dismiss="modal" aria-label="Close">
+                <i class="fa fa-remove"></i>
+              </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock search %}
 
 <nav>
   <div class="inner">
@@ -121,6 +145,9 @@
       <div class="btn-group btn-group-sm">
         <button class="btn btn-default" data-fire="totop" title="Go to Top">
           <i class="fa fa-arrow-up"></i>
+        </button>
+        <button class="btn btn-default" data-toggle="modal" data-target="#searchModal" title="Search">
+          <i class="fa fa-search"></i>
         </button>
         <button class="btn btn-default" data-fire="print" title="Print this page">
           <i class="fa fa-print"></i>

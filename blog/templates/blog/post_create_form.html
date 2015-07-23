@@ -20,11 +20,12 @@
             <button class="btn btn-success">Save <i class="fa fa-save"></i></button>
             {% if object %}
                 <a href="{% url 'blog:detail' object.pk %}" class="btn btn-default">Back</a>
+                <a href="{% url 'blog:delete' object.pk %}" class="btn btn-default"><i class="fa fa-trash"></i></a>
             {% endif %}
         </div>
     </form>
     {% else %}
-    403: forbidden...
+    <h2>403: forbidden...</h2>
     {% endif %}
 </div>
 {% endblock page %}
