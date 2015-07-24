@@ -90,13 +90,44 @@ $(document).ready(function () {
   });
 
   $('#search').on('keyup', function () {
-    var q = $(this).val();
+    var q = $.trim( $(this).val() );
     if (q != '') {
       $(this).parents('.modal-content').find('.modal-body').remove();
       $(this).parents('.modal-content').append('<div class="modal-body"><div id="searchResults"></div></div>');
       $('#searchResults').html('&nbsp;').load( $(this).parents('form').attr('action') + '?q=' + q );
     }
   });
+
+  $('<div id="currTags"></div>').insertBefore( $('#id_tags') ).hide();
+  $('<div id="searchTagResults"></div>').insertAfter( $('#id_tags') ).hide();
+  $('#id_tags').clone().attr({'id': 'id_tags_', 'name': ''}).insertAfter( $('#id_tags') );
+  $('#id_tags').attr('type', 'hidden');
+  $('label[for=id_tags]').attr('for', 'id_tags_');
+
+  // TODO:: parse current tags!
+  $('#id_tags_').on('keyup', function () {
+    var q = $.trim( $(this).val() );
+    if (q != '') {
+      $('#searchTagResults').show().html('&nbsp;').load( $('#search_tag_address').val() + '?q=' + q );
+    } else {
+      $('#searchTagResults').hide();
+    }
+  });
+
+  $('#searchTagResults').on('click', 'li', function () {
+    var slug = $(this).data('slug');
+    var name = $(this).find('.tag-name').text();
+    if ( $('#currTags').find('span.label[data-slug="' + slug + '"]').length == 0 ) {
+      $('#currTags').show().append('<span class="label label-info" data-slug="' + slug + '">' + name + ' <span class="badge tag-remove"><i class="fa fa-remove"></i></span></span> &nbsp; ');
+      var val = $('#id_tags').val();
+      $('#id_tags').val( val + ((val) ? ', ' : '') + name );
+      console.log( $('#id_tags').val() );
+    }
+    $('#id_tags_').val('');
+    $('#searchTagResults').hide();
+  });
+
+  // TODO:: remove current tag - click on .tag-remove
 
   $('table').addClass('table table-bordered').find('caption').addClass('text-center');
 

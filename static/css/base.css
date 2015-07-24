@@ -283,6 +283,11 @@ article.tag_detail ul span {
   width: 100%;
 }
 
+/* Form create/edit */
+#currTags:not(:empty) {
+  margin-bottom: 10px;
+}
+
 /* Small resolution */
 @media only screen and (max-width: 740px) {
 

@@ -16,6 +16,9 @@
                 {% endfor %}
             </div>
         {% endfor %}
+        <div class="hidden">
+            <input type="hidden" id="search_tag_address" value="{% url 'blog:tag-search' %}">
+        </div>
         <div class="btn-group" role="group">
             <button class="btn btn-success">Save <i class="fa fa-save"></i></button>
             {% if object %}

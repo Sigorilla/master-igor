@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     # url(r'^post/tag_del/(?P<post_id>\d+)/$', views.tag_del, name='tag_del'),
     url(r'^archive/$', views.archive, name='archive'),
     url(r'^tag/$', views.TagList.as_view(), name='tags'),
+    url(r'^tag/search/$', views.SearchTagList.as_view(), name='tag-search'),
     url(r'^tag/(?P<slug>[-\w]+)/$', views.tag, name='tag'),
 )
