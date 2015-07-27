@@ -1,10 +1,6 @@
-{% if tags %}
-  <ul class="tags-search list-unstyled">
-  {% for tag in tags %}
-    <li data-slug="{{ tag.slug }}">
-      <span class="tag-name">{{ tag.name }}</span>
-      <span class="tag-count badge">{{ tag.taggit_taggeditem_items.all.count }}</span>
-    </li>
-  {% endfor %}
-  </ul>
-{% endif %}
+{% for tag in tags %}
+  <button type="button" class="btn btn-default search-tag-item" data-slug="{{ tag.slug }}">
+    <span class="tag-name">{{ tag.name }}</span>
+    <span class="tag-count badge">{{ tag.taggit_taggeditem_items.all.count }}</span>
+  </button>
+{% endfor %}

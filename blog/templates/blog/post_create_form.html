@@ -10,6 +10,7 @@
         {% for field in form %}
             <div class="form-group {{ field.errors|yesno:"has-error," }}">
                 <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
+                <p class="help-block">{{ field.help_text }}</p>
                 {{ field|add_class:"form-control" }}
                 {% for error in field.errors %}
                     <p class="help-block">{{ error }}</p>

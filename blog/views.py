@@ -137,7 +137,7 @@ class SearchList(SearchMixin, NeverCacheMixin, LoginRequiredMixin, generic.ListV
 
     def get_queryset(self):
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
-            query_string = self.request.GET['q']
+            query_string = self.request.GET['q'].strip()
             entry_query = self.get_query(query_string, ['title', 'intro', 'post'])
             return Post.objects.filter(entry_query).order_by('-pub_date')
         else:
@@ -150,8 +150,8 @@ class SearchList(SearchMixin, NeverCacheMixin, LoginRequiredMixin, generic.ListV
 
     def get_context_data(self, **kwargs):
         context = super(SearchList, self).get_context_data(**kwargs)
-        context['query'] = self.request.GET['q']
-        context['page_title'] = self.request.GET['q']
+        context['query'] = self.request.GET['q'].strip()
+        context['page_title'] = self.request.GET['q'].strip()
         context['fa'] = 'search'
         return context
 
@@ -174,7 +174,7 @@ class SearchTagList(SearchMixin, generic.ListView):
 
     def get_queryset(self):
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
-            query_string = self.request.GET['q']
+            query_string = self.request.GET['q'].strip()
             entry_query = self.get_query(query_string, ['name'])
             return Tag.objects.filter(entry_query)
         else:
@@ -187,8 +187,8 @@ class SearchTagList(SearchMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchTagList, self).get_context_data(**kwargs)
-        context['query'] = self.request.GET['q']
-        context['page_title'] = self.request.GET['q']
+        context['query'] = self.request.GET['q'].strip()
+        context['page_title'] = self.request.GET['q'].strip()
         context['fa'] = 'search'
         return context
 

@@ -284,8 +284,8 @@ article.tag_detail ul span {
 }
 
 /* Form create/edit */
-#currTags:not(:empty) {
-  margin-bottom: 10px;
+#searchTagResults {
+  padding: 5px 20px;
 }
 
 /* Small resolution */

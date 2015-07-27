@@ -98,32 +98,43 @@ $(document).ready(function () {
     }
   });
 
-  $('<div id="currTags"></div>').insertBefore( $('#id_tags') ).hide();
-  $('<div id="searchTagResults"></div>').insertAfter( $('#id_tags') ).hide();
-  $('#id_tags').clone().attr({'id': 'id_tags_', 'name': ''}).insertAfter( $('#id_tags') );
-  $('#id_tags').attr('type', 'hidden');
-  $('label[for=id_tags]').attr('for', 'id_tags_');
 
-  // TODO:: parse current tags!
-  $('#id_tags_').on('keyup', function () {
-    var q = $.trim( $(this).val() );
-    if (q != '') {
+  $('<div id="searchTagResults"></div>').insertAfter( $('#id_tags') ).hide();
+  $('#id_tags').data('tags-current', $('#id_tags').val()).attr('autocomplete', 'off');
+  if ($('#id_tags').val() != '') {
+    $('#id_tags').val($('#id_tags').val() + ', ');
+  }
+
+  $('#id_tags').on('keyup', function (event) {
+    console.log(event);
+    var values = $.trim( $(this).val().replace(/(,\s)/g, ',') ).split(',');
+    var q = values.pop();
+    if (q.length > 0) {
       $('#searchTagResults').show().html('&nbsp;').load( $('#search_tag_address').val() + '?q=' + q );
     } else {
       $('#searchTagResults').hide();
     }
+    $('#id_tags').data('tags-current', values.join(', '));
   });
 
-  $('#searchTagResults').on('click', 'li', function () {
+  $('#searchTagResults').on('click', '.search-tag-item', function () {
     var slug = $(this).data('slug');
     var name = $(this).find('.tag-name').text();
-    if ( $('#currTags').find('span.label[data-slug="' + slug + '"]').length == 0 ) {
-      $('#currTags').show().append('<span class="label label-info" data-slug="' + slug + '">' + name + ' <span class="badge tag-remove"><i class="fa fa-remove"></i></span></span> &nbsp; ');
+
+    var tags = $('#id_tags').data('tags-current');
+
+    tags = tags + ((tags) ? ', ' : '') + name;
+    $('#id_tags').data('tags-current', tags);
+    $('#id_tags').val(tags + ', ').focus();
+
+    /*if ( $('#currTags').find('span.label[data-slug="' + slug + '"]').length == 0 ) {
+      $('#currTags').show().append('<span class="label label-info" data-slug="' + slug + '">' + name + ' <span class="badge tag-remove"><i class="fa fa-remove"></i></span></span>&nbsp;');
       var val = $('#id_tags').val();
       $('#id_tags').val( val + ((val) ? ', ' : '') + name );
       console.log( $('#id_tags').val() );
-    }
-    $('#id_tags_').val('');
+    }*/
+    // $('#id_tags_').attr('attr', tags);
+    
     $('#searchTagResults').hide();
   });
 
