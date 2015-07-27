@@ -32,6 +32,7 @@ class Menu(models.Model):
   sort = models.PositiveIntegerField(default=100)
   level = models.IntegerField(default=0)
   subitems = models.ManyToManyField('self', blank=True)
+  for_staff = models.BooleanField(default=False)
 
   def is_active(self):
     return self.sort > 0
