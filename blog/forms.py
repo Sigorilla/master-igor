@@ -6,7 +6,7 @@ class PostCreateForm(forms.ModelForm):
 
   class Meta:
     model = Post
-    fields = ('title', 'intro', 'post', 'tags')
+    fields = ('title', 'intro', 'post', 'tags', 'active')
     widgets = {
       'intro': forms.Textarea(attrs={'rows':4})
     }

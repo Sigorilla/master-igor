@@ -60,6 +60,12 @@ class BlogList(NeverCacheMixin, generic.ListView):
     context_object_name = "posts"
     paginate_by = 2
 
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Post.objects.all()
+        else:
+            return Post.objects.filter(active__exact=True)
+
     def get_context_data(self, **kwargs):
         context = super(BlogList, self).get_context_data(**kwargs)
         context['page_title'] = 'Blog'
@@ -76,7 +82,6 @@ class PostView(NeverCacheMixin, generic.DetailView):
         return context
 
 
-# TODO:: create post without publications
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
     model = Post
     form_class = PostCreateForm

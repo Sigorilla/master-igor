@@ -26,6 +26,9 @@
       {% endif %}
       <p class="pub_date">
         {% if user.is_staff %}
+        {% if not post.active %}
+        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-exclamation-triangle"></i></a>
+        {% endif %}
         <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
         <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
         {% endif %}

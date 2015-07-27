@@ -7,16 +7,61 @@
     <form method="post" action="">
         {% csrf_token %}
         {{ form.non_field_errors }}
-        {% for field in form %}
-            <div class="form-group {{ field.errors|yesno:"has-error," }}">
-                <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
-                <p class="help-block">{{ field.help_text }}</p>
-                {{ field|add_class:"form-control" }}
-                {% for error in field.errors %}
-                    <p class="help-block">{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endfor %}
+
+        <div class="form-group {{ form.title.errors|yesno:"has-error," }}">
+            <label for="{{ form.title.id_for_label }}" class="control-label">{{ form.title.label }}</label>
+            {% if form.title.help_text %}
+                <p class="help-block">{{ form.title.help_text }}</p>
+            {% endif %}
+            {{ form.title|add_class:"form-control" }}
+            {% for error in form.title.errors %}
+                <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {{ form.intro.errors|yesno:"has-error," }}">
+            <label for="{{ form.intro.id_for_label }}" class="control-label">{{ form.intro.label }}</label>
+            {% if form.intro.help_text %}
+                <p class="help-block">{{ form.intro.help_text }}</p>
+            {% endif %}
+            {{ form.intro|add_class:"form-control" }}
+            {% for error in form.intro.errors %}
+                <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {{ form.post.errors|yesno:"has-error," }}">
+            <label for="{{ form.post.id_for_label }}" class="control-label">{{ form.post.label }}</label>
+            {% if form.post.help_text %}
+                <p class="help-block">{{ form.post.help_text }}</p>
+            {% endif %}
+            {{ form.post|add_class:"form-control" }}
+            {% for error in form.post.errors %}
+                <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {{ form.tags.errors|yesno:"has-error," }}">
+            <label for="{{ form.tags.id_for_label }}" class="control-label">{{ form.tags.label }}</label>
+            {% if form.tags.help_text %}
+                <p class="help-block">{{ form.tags.help_text }}</p>
+            {% endif %}
+            {{ form.tags|add_class:"form-control" }}
+            {% for error in form.tags.errors %}
+                <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group {{ form.active.errors|yesno:"has-error," }}">
+            <label for="{{ form.active.id_for_label }}" class="control-label">{{ form.active.label }} {{ form.active }}</label>
+            {% if form.active.help_text %}
+                <p class="help-block">{{ form.active.help_text }}</p>
+            {% endif %}
+            {% for error in form.active.errors %}
+                <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
         <div class="hidden">
             <input type="hidden" id="search_tag_address" value="{% url 'blog:tag-search' %}">
         </div>
