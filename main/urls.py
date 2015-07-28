@@ -19,8 +19,8 @@ urlpatterns = patterns('',
   url(r'^findme/', include('findme.urls')),
   url(r'^fitness/', include('fitness.urls')),
   url(r'^blog/', include('blog.urls', namespace="blog")),
-  url(r'^joinme/', include('joinme.urls', namespace="joinme")),
-  url(r'^test/', RedirectView.as_view(url=reverse_lazy("joinme:index")), name="redirect-joinme"),
+  # url(r'^joinme/', include('joinme.urls', namespace="joinme")),
+  # url(r'^test/', RedirectView.as_view(url=reverse_lazy("joinme:index")), name="redirect-joinme"),
 )
 
 handler404 = 'main.views.handler404'
