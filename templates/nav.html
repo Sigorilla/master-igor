@@ -1,8 +1,12 @@
+{# <div class="text-right"> #}
 <ul class="menu">
-  <li><a href="/">Main</a></li>
-  <li><a href="/schedule/">Schedule</a></li>
-  <li><a href="/scrobbler/">Scrobbler</a></li>
-  <li><a href="/base/">Capabilities</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="//sigorilla.github.io/" target="_blank">Github.io</a></li>
+  {% if user.is_staff %}
+    <li><a href="{% url 'blog:create' %}">New</a></li>
+  {% endif %}
+  <li><a href="{% url 'blog:tags' %}">Tags</a></li>
+  <li><a href="{% url 'about' %}">About</a></li>
+  {# <li><a href="{% url 'schedule' %}">Schedule</a></li> #}
+  <li><a href="{% url 'scrobbler' %}">Scrobbler</a></li>
+  <li><a href="{% url 'admin:index' %}" target="_blank">Admin</a></li>
 </ul>
+{# </div> #}

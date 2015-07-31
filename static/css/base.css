@@ -12,12 +12,13 @@ html {
 }
 body {
   /*background: fixed url(http://yandex.ru/images/today?size=1920x1080) no-repeat;*/
-  font-family: Helvetica, Arial, sans-serif;
+  /*font-family: Helvetica, Arial, sans-serif;*/
+  font-family: "PT Serif", Georgia, "Times New Roman", serif;
   font-size: 1.3em;
   line-height: 1.5em;
   margin-bottom: 5em;
   margin-top: 2.5em;
-  color: #444;
+  color: #555;
   word-wrap: break-word;
   /*overflow-y: scroll;*/
 }
@@ -27,14 +28,15 @@ a:hover,
 a:active,
 a:focus,
 a:visited {
-  color: #0d97ff;
+  color: #222;
   text-decoration: none;
+  border-bottom: 1px solid #ddd;
 }
 a:hover,
 a:active,
 a:focus,
 a.selected {
-  color: #008af3;
+  color: #000;
   border-bottom: 1px solid;
 }
 h2:target,
@@ -193,6 +195,7 @@ nav ul.menu > li a.selected {
 nav ul.submenu {
   display: none;
   position: absolute;
+  right: 0;
   background-color: #fff;
   border-left: 1px solid #0d97ff;
   border-bottom: 1px solid #0d97ff;

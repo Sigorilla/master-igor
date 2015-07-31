@@ -129,7 +129,7 @@ def archive(request):
 
     obj = {
         'archive': archive,
-        'page_title': "Archive",
+        'page_title': "",
     }
     return render(request, 'blog/archive.html', obj)
 
@@ -155,8 +155,12 @@ class SearchList(SearchMixin, NeverCacheMixin, LoginRequiredMixin, generic.ListV
 
     def get_context_data(self, **kwargs):
         context = super(SearchList, self).get_context_data(**kwargs)
-        context['query'] = self.request.GET['q'].strip()
-        context['page_title'] = self.request.GET['q'].strip()
+        if ('q' in self.request.GET) and self.request.GET['q'].strip():
+          context['query'] = self.request.GET['q'].strip()
+          context['page_title'] = self.request.GET['q'].strip()
+        else:
+          context['query'] = ''
+          context['page_title'] = 'Search'
         context['fa'] = 'search'
         return context
 
@@ -192,8 +196,12 @@ class SearchTagList(SearchMixin, generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchTagList, self).get_context_data(**kwargs)
-        context['query'] = self.request.GET['q'].strip()
-        context['page_title'] = self.request.GET['q'].strip()
+        if ('q' in self.request.GET) and self.request.GET['q'].strip():
+          context['query'] = self.request.GET['q'].strip()
+          context['page_title'] = self.request.GET['q'].strip()
+        else:
+          context['query'] = ''
+          context['page_title'] = 'Search'
         context['fa'] = 'search'
         return context
 

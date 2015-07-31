@@ -1,15 +1,22 @@
 {% if posts %}
   <h2>Results</h2>
-  {% for post in posts %}
-    <h3 class="post-title">
-      <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
-    </h3>
-  {% endfor %}
-  {% if posts|length > 5 %}
-    <div class="text-right">
-      <a href="{% url 'blog:search' %}?q={{ query }}&page=2">More results</a>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <ul class="list-unstyled">
+      {% for post in posts %}
+        <li>
+          <span class="pull-right">{{ post.pub_date|date:"F d, Y" }}</span>
+          <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+      </ul>
+      {% if posts|length > 5 %}
+        <div class="text-right">
+          <a href="{% url 'blog:search' %}?q={{ query }}&page=2">More results</a>
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 {% else %}
 <article class="warning">
   <h2>Warning</h2>

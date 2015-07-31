@@ -7,10 +7,10 @@
 {% for year in by_year %}
 <article class="archive" data-year="">
   <h2>{{ year.grouper }}</h2>
-  <ul>
+  <ul class="list-unstyled">
   {% for post in year.list %}
     <li>
-      <span>{{ post.post.pub_date|date:"d.m.Y" }}</span>
+      <span class="pull-right">{{ post.post.pub_date|date:"F d, Y" }}</span>
       <a href="{% url 'blog:detail' post.post.id %}">{{ post.post.title }}</a>
     </li>
   {% endfor %}

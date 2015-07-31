@@ -56,20 +56,25 @@
 
 <nav>
   <div class="inner">
-  {% block navigation %}
-    {% load menu_top %}
-    {% show_menu %}
-    {# {% include "nav.html" %} #}
-  {% endblock navigation %}
+    <div class="text-right">
+      <span class="pull-left"><strong><a href="/">Homepage</a></strong></span>
+      {% block navigation %}
+        {# {% load menu_top %} #}
+        {# {% show_menu %} #}
+        {% include "nav.html" %}
+      {% endblock navigation %}
+    </div>
   </div>
 </nav>
 
 {% block header %}
+{% if page_title %}
 <header id="header">
   <div class="inner">
     <h1>{% block page_title %} <i class="fa fa-{{ fa|default:'coffee' }}"></i> {{ page_title|default:"Igor Stepanov" }} {% endblock page_title %}</h1>
   </div>
 </header>
+{% endif %}
 {% endblock header %}
 
 
