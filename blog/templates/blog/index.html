@@ -3,6 +3,21 @@
 
 {% block page %}
   {% if posts %}
+  <article>
+    <ul class="list-unstyled post-list">
+    {% for post in posts %}
+      <li class="post-item">
+        {% if user.is_staff and not post.active %}
+          <i class="fa fa-exclamation-triangle"></i>
+        {% endif %}
+        <span class="pull-right post-item-pubdate">{{ post.pub_date|date:"F d, Y" }}</span>
+        <a href="{% url 'blog:detail' post.id %}" class="post-item-title">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </article>
+      {% comment %}
+        
       {% for post in posts %}
         <article class="post-list" data-post-id="{{ post.id }}">
           <h2 class="post-title">
@@ -28,6 +43,7 @@
         </ul>
       </div>
       {% endif %}
+      {% endcomment %}
   {% else %}
     <article class="warning">
       <h2>Warning</h2>

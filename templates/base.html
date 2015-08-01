@@ -19,7 +19,7 @@
     <link rel="icon" type="image/x-icon" href="{% static "images/favicon.png" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
-    <link rel="stylesheet" href="{% static "css/base.css" %}?v=0.2.0">
+    <link rel="stylesheet" href="{% static "css/base.css" %}?v=0.2.1">
     <script src="//cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
     <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>
@@ -148,7 +148,7 @@
   <div class="inner">
   {% block footer %}
     <div>
-      <div class="btn-group btn-group-sm">
+      <div class="btn-group btn-group-sm pull-right">
         <button class="btn btn-default" data-fire="totop" title="Go to Top">
           <i class="fa fa-arrow-up"></i>
         </button>
@@ -158,13 +158,13 @@
         <button class="btn btn-default" data-fire="print" title="Print this page">
           <i class="fa fa-print"></i>
         </button>
-      </div> &copy; 2012&ndash;{% now "Y" %}</div>
-    <div>Igor Stepanov = <code>[
+      </div> 
+      Igor Stepanov = <code>[
       <a href="//vk.com/sigorilla" target="_blank">vk</a>, 
       <a href="//twitter.com/sigorillo" target="_blank">twitter</a>,
       <a href="//www.facebook.com/sigorilla" target="_blank">facebook</a>,
       <a href="mailto:sigorilla@gmail.com" target="_blank">email</a>,
-    ]</code></div>
+    ]</code> &copy; 2012&ndash;{% now "Y" %}</div>
   {% endblock footer %}
   </div>
 </footer>

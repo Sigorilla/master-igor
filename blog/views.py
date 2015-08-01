@@ -173,6 +173,7 @@ class TagList(NeverCacheMixin, generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(TagList, self).get_context_data(**kwargs)
         context['page_title'] = 'Tags'
+        context['fa'] = 'tags'
         return context
 
 
@@ -211,5 +212,6 @@ def tag(request, slug=""):
     obj = {
         'posts': posts,
         'page_title': slug,
+        'fa':'tag',
     }
     return render(request, 'blog/tag.html', obj)

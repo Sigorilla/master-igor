@@ -5,13 +5,16 @@
 {% regroup archive|dictsortreversed:"year" by year as by_year %}
 
 {% for year in by_year %}
-<article class="archive" data-year="">
+<article class="archive" data-year="{{ year.grouper }}">
   <h2>{{ year.grouper }}</h2>
-  <ul class="list-unstyled">
+  <ul class="list-unstyled post-list">
   {% for post in year.list %}
-    <li>
-      <span class="pull-right">{{ post.post.pub_date|date:"F d, Y" }}</span>
-      <a href="{% url 'blog:detail' post.post.id %}">{{ post.post.title }}</a>
+    <li class="post-item">
+      {% if user.is_staff and not post.post.active %}
+        <i class="fa fa-exclamation-triangle"></i>
+      {% endif %}
+      <span class="pull-right post-item-pubdate">{{ post.post.pub_date|date:"F d, Y" }}</span>
+      <a href="{% url 'blog:detail' post.post.id %}" class="post-item-title">{{ post.post.title }}</a>
     </li>
   {% endfor %}
   </ul>

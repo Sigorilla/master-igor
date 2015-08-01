@@ -2,11 +2,14 @@
   <h2>Results</h2>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <ul class="list-unstyled">
+      <ul class="list-unstyled post-list">
       {% for post in posts %}
-        <li>
-          <span class="pull-right">{{ post.pub_date|date:"F d, Y" }}</span>
-          <a href="{% url 'blog:detail' post.id %}">{{ post.title }}</a>
+        <li class="post-item">
+          {% if user.is_staff and not post.active %}
+            <i class="fa fa-exclamation-triangle"></i>
+          {% endif %}
+          <span class="pull-right post-item-pubdate">{{ post.pub_date|date:"F d, Y" }}</span>
+          <a href="{% url 'blog:detail' post.id %}" class="post-item-title">{{ post.title }}</a>
         </li>
       {% endfor %}
       </ul>

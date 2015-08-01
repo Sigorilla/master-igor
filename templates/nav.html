@@ -1,4 +1,5 @@
-{# <div class="text-right"> #}
+<button class="menu-toggle btn btn-default" data-toggle="collapse" data-target="#mainmenu" area-expanded="true" area-controls="mainmenu"><i class="fa fa-bars"></i></button>
+<div class="collapse" id="mainmenu">
 <ul class="menu">
   {% if user.is_staff %}
     <li><a href="{% url 'blog:create' %}">New</a></li>
@@ -8,5 +9,4 @@
   {# <li><a href="{% url 'schedule' %}">Schedule</a></li> #}
   <li><a href="{% url 'scrobbler' %}">Scrobbler</a></li>
   <li><a href="{% url 'admin:index' %}" target="_blank">Admin</a></li>
-</ul>
-{# </div> #}
+</ul></div>

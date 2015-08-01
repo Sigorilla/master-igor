@@ -17,6 +17,7 @@
       </div>
       {% if post.tags.all %}
       <p class="tags">
+        <i class="fa fa-tags"></i>
         {# <code>[ #}
         {% for tag in post.tags.all %}
         <a href="{% url 'blog:tag' tag.slug %}" class="btn btn-default btn-xs">{{ tag }}</a>
@@ -27,12 +28,12 @@
       <p class="pub_date">
         {% if user.is_staff %}
         {% if not post.active %}
-        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-exclamation-triangle"></i></a>
+        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-danger"><i class="fa fa-exclamation-triangle"></i></a>
         {% endif %}
         <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
         <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
         {% endif %}
-        {{ post.pub_date|date:"j.m.Y H:i" }}
+        {{ post.pub_date|date:"F d, Y H:i" }}
       </p>
     </article>
     {# TODO:: prev and next #}
