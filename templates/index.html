@@ -4,11 +4,13 @@
 {% block page %}
 
 <article class="index text-justify">
-	<img src="{% static "images/igor.jpg" %}" alt="Igor" align="right" width="200" class="img-circle">
-	<p>My name is Igor. I'm programmer from Moscow. Also I'm studying at <a href="//phystech.edu" target="_blank">MIPT</a></p>
-	<p>I started programming in school at age of 14. I took part in different competitions betweet schools. I got interested in PHP and webdesign at 16. Since then I have been improving my abilities. C/C++, PHP, Javascript, HTML, CSS, Django, Python, MYSQL are all on the list of skills. I love frontend as well as backend development.</p>
-	<p>I love hackathons. This summer I took part in Tizen Hackathon&nbsp;(Mobile operating system based on HTML5 and Javascript <a href="https://www.tizen.org" target="_blank">tizen.org</a>). My last homeproject is <a href="https://github.com/sigorilla/findme" target="_blank">FindMe</a>. I and my friends made <a href="/findme/">a GEO location social app</a> on Facebook Hackathon at MIPT.</p>
-	<p>Other my projects you can see on <a href="https://github.com/sigorilla" target="_blank">my GitHub page</a>. All my contacts are on page <a href="/about/">About</a>.</p>
+  <img src="{% static "images/igor.jpg" %}" alt="Igor" align="right" width="200" class="img-circle">
+  <p>My name is Igor. I'm programmer from Moscow. Also I'm studying at <a href="//phystech.edu" target="_blank">MIPT</a></p>
+  <p>I started programming in school at age of 14. I took part in different competitions betweet schools. I got interested in PHP and webdesign at 16. Since then I have been improving my abilities. C/C++, PHP, Javascript, HTML, CSS, Django, Python, MYSQL are all on the list of skills. I love frontend as well as backend development.</p>
+  <p>I love hackathons. This summer I took part in Tizen Hackathon&nbsp;(Mobile operating system based on HTML5 and Javascript <a href="https://www.tizen.org" target="_blank">tizen.org</a>). My last homeproject is <a href="https://github.com/sigorilla/findme" target="_blank">FindMe</a>. I and my friends made <a href="/findme/">a GEO location social app</a> on Facebook Hackathon at MIPT.</p>
+  <p>Other my projects you can see on <a href="https://github.com/sigorilla" target="_blank">my GitHub page</a>. All my contacts are on page <a href="/about/">About</a>.</p>
+  <hr>
+  <p>I want to visit all countries. So you can see my progress on <a href="{% url 'travel' %}">Travel page</a>.</p>
 </article>
 
 {% endblock page %}

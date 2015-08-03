@@ -11,6 +11,7 @@ urlpatterns = patterns('',
   url(r'^scrobbler/$', 'main.views.scrobbler', name='scrobbler'),
   url(r'^schedule/$', 'main.views.schedule', name='schedule'),
   url(r'^about/$', 'main.views.home', name='about'),
+  url(r'^about/travel/$', 'main.views.travel', name='travel'),
   url(r'^base/$', 'main.views.base', name='base'),
   url(r'^projects/$', 'main.views.projects', name='projects'),
 

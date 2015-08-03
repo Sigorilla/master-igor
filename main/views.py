@@ -27,6 +27,13 @@ def about(request):
   }
   return render(request, 'about.html', obj)
 
+def travel(request):
+  obj = {
+    'fa': 'globe',
+    'page_title': 'Travel',
+  }
+  return render(request, 'travel.html', obj)
+
 def scrobbler(request):
   obj = {
     'fa': 'lastfm-square',
