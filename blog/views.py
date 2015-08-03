@@ -177,7 +177,7 @@ class TagList(NeverCacheMixin, generic.ListView):
         return context
 
 
-class SearchTagList(SearchMixin, generic.ListView):
+class SearchTagList(SearchMixin, NeverCacheMixin, generic.ListView):
     model = Tag
     template_name = 'blog/tags.html'
     context_object_name = 'tags'
