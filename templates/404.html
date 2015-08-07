@@ -1,14 +1,7 @@
 {% extends "base.html" %}
-{% block title %}
-  Client Error
-{% endblock title %}
-{% block page_title %}
-  <i class="fa fa-exclamation-circle"></i> 404: Client Error
-{% endblock page_title %}
 
 {% block page %}
   <article class="error" data-code="404">
-    <h2>Not Found</h2>
     <p class="intro">Sorry, no pages are available on <code>{{ current_uri }}</code>. Try load other page or go to <a href="/">main page</a>.</p>
   </article>
 {% endblock page %}

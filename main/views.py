@@ -61,8 +61,23 @@ def projects(request):
   }
   return render(request, 'projects.html', obj)
 
+def handler403(request):
+  obj = {
+    'fa': 'exclamation-circle',
+    'page_title': '403: Forbidden',
+  }
+  return render(request, '403.html', obj)
+
 def handler404(request):
-  return render(request, '404.html')
+  obj = {
+    'fa': 'exclamation-circle',
+    'page_title': '404: Not Found',
+  }
+  return render(request, '404.html', obj)
 
 def handler500(request):
-  return render(request, '500.html')
+  obj = {
+    'fa': 'exclamation-triangle',
+    'page_title': '500: Internal Server Error',
+  }
+  return render(request, '500.html', obj)
