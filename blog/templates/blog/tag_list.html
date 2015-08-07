@@ -6,7 +6,8 @@
     <hr>
     {% for tag in tags %}
       <a class="btn btn-default tag-item" href="{% url 'blog:tag' tag.slug %}">
-        {{ tag.name }} <span class="badge">{{ tag.taggit_taggeditem_items.all.count }}</span>
+        {{ tag.name }} 
+        {# <span class="badge">{{ tag.taggit_taggeditem_items.all.count }}</span> #}
       </a>
     {% endfor %}
     <hr>

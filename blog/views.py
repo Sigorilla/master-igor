@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse_lazy
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import render
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.decorators import login_required
 from django.views import generic
+from django.http import Http404
 
 import re
 
@@ -13,6 +15,7 @@ from taggit.models import Tag
 
 
 class SearchMixin(object):
+
     @staticmethod
     def normalize_query(query_string,
                         findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
@@ -41,6 +44,7 @@ class SearchMixin(object):
 
 
 class LoginRequiredMixin(object):
+
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
@@ -48,37 +52,36 @@ class LoginRequiredMixin(object):
 
 
 class NeverCacheMixin(object):
+
     @classmethod
     def as_view(cls, **initkwargs):
         view = super(NeverCacheMixin, cls).as_view(**initkwargs)
         return never_cache(view)
 
 
-class BlogList(NeverCacheMixin, generic.ListView):
+class PostListView(NeverCacheMixin, generic.ListView):
     model = Post
-    template_name = "blog/index.html"
-    context_object_name = "posts"
-    paginate_by = 2
-
-    def get_queryset(self):
-        if self.request.user.is_staff:
-            return Post.objects.all()
-        else:
-            return Post.objects.filter(active__exact=True)
+    context_object_name = 'posts'
 
     def get_context_data(self, **kwargs):
-        context = super(BlogList, self).get_context_data(**kwargs)
-        context['page_title'] = 'Blog'
+        context = super(PostListView, self).get_context_data(**kwargs)
+        # context['page_title'] = 'Blog'
         return context
 
 
-class PostView(NeverCacheMixin, generic.DetailView):
+class PostDetailView(NeverCacheMixin, generic.DetailView):
     model = Post
-    template_name = 'blog/detail.html'
+
+    def get(self, request, *args, **kwargs):
+        get = super(PostDetailView, self).get(request, *args, **kwargs)
+        if not (request.user.is_staff or self.object.active):
+            raise PermissionDenied
+        return get
 
     def get_context_data(self, **kwargs):
-        context = super(PostView, self).get_context_data(**kwargs)
-        context['page_title'] = self.get_object().title
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        if self.request.user.is_staff or self.object.active:
+            context['page_title'] = self.get_object().title
         return context
 
 
@@ -94,13 +97,13 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class PostEditView(LoginRequiredMixin, generic.UpdateView):
+class PostUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Post
     form_class = PostCreateForm
     template_name_suffix = '_create_form'
 
     def get_context_data(self, **kwargs):
-        context = super(PostEditView, self).get_context_data(**kwargs)
+        context = super(PostUpdateView, self).get_context_data(**kwargs)
         context['page_title'] = 'Edit post'
         context['fa'] = 'edit'
         return context
@@ -117,69 +120,72 @@ class PostDeleteView(LoginRequiredMixin, generic.DeleteView):
         return context
 
 
-@never_cache
-def archive(request):
-    post = Post.objects.all().order_by('-pub_date')
-    archive = list()
-    for item in post:
-        archive.append({
-            'post': item,
-            'year': item.pub_date.date().year,
-        })
-
-    obj = {
-        'archive': archive,
-        'page_title': "",
-    }
-    return render(request, 'blog/archive.html', obj)
-
-
-class SearchList(SearchMixin, NeverCacheMixin, LoginRequiredMixin, generic.ListView):
+class SearchPostListView(SearchMixin, NeverCacheMixin, generic.ListView):
     model = Post
-    template_name = 'blog/index.html'
+    template_name = 'blog/search_post.html'
     context_object_name = 'posts'
-    paginate_by = 5
 
     def get_queryset(self):
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
             query_string = self.request.GET['q'].strip()
-            entry_query = self.get_query(query_string, ['title', 'intro', 'post'])
+            entry_query = self.get_query(
+                query_string, ['title', 'intro', 'post'])
             return Post.objects.filter(entry_query).order_by('-pub_date')
         else:
-            self.paginate_by = None
+            return Post.objects.all()
 
     def render_to_response(self, context, **response_kwargs):
         if self.request.is_ajax():
-            self.template_name = 'blog/search_ajax.html'
-        return super(SearchList, self).render_to_response(context, **response_kwargs)
+            self.template_name = 'blog/search_post_ajax.html'
+        return super(SearchPostListView, self).render_to_response(
+            context, **response_kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(SearchList, self).get_context_data(**kwargs)
+        context = super(SearchPostListView, self).get_context_data(**kwargs)
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
-          context['query'] = self.request.GET['q'].strip()
-          context['page_title'] = self.request.GET['q'].strip()
+            context['query'] = self.request.GET['q'].strip()
+            context['page_title'] = self.request.GET['q'].strip()
         else:
-          context['query'] = ''
-          context['page_title'] = 'Search'
+            context['query'] = ''
+            context['page_title'] = 'Search'
         context['fa'] = 'search'
         return context
 
 
-class TagList(NeverCacheMixin, generic.ListView):
+class TagListView(NeverCacheMixin, generic.ListView):
     model = Tag
-    template_name = "blog/tags.html"
-    context_object_name = "tags"
+    template_name = 'blog/tag_list.html'
+    context_object_name = 'tags'
 
     def get_context_data(self, **kwargs):
-        context = super(TagList, self).get_context_data(**kwargs)
+        context = super(TagListView, self).get_context_data(**kwargs)
         context['page_title'] = 'Tags'
         context['fa'] = 'tags'
         return context
 
 
-class SearchTagList(SearchMixin, NeverCacheMixin, generic.ListView):
+class PostByTagListView(NeverCacheMixin, generic.ListView):
+    model = Post
+    template_name = 'blog/tag_detail.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs['slug'])
+
+    def get_context_data(self, **kwargs):
+        context = super(PostByTagListView, self).get_context_data(**kwargs)
+        try:
+            tag = Tag.objects.get(slug=self.kwargs['slug'])
+            context['page_title'] = tag.name
+        except Tag.DoesNotExist:
+            raise Http404
+        context['fa'] = 'tag'
+        return context
+
+
+class SearchTagListView(SearchMixin, NeverCacheMixin, generic.ListView):
     model = Tag
-    template_name = 'blog/tags.html'
+    template_name = 'blog/search_tag_ajax.html'
     context_object_name = 'tags'
 
     def get_queryset(self):
@@ -193,25 +199,16 @@ class SearchTagList(SearchMixin, NeverCacheMixin, generic.ListView):
     def render_to_response(self, context, **response_kwargs):
         if self.request.is_ajax():
             self.template_name = 'blog/search_tag_ajax.html'
-        return super(SearchTagList, self).render_to_response(context, **response_kwargs)
+        return super(SearchTagListView, self).render_to_response(
+            context, **response_kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(SearchTagList, self).get_context_data(**kwargs)
+        context = super(SearchTagListView, self).get_context_data(**kwargs)
         if ('q' in self.request.GET) and self.request.GET['q'].strip():
-          context['query'] = self.request.GET['q'].strip()
-          context['page_title'] = self.request.GET['q'].strip()
+            context['query'] = self.request.GET['q'].strip()
+            context['page_title'] = self.request.GET['q'].strip()
         else:
-          context['query'] = ''
-          context['page_title'] = 'Search'
+            context['query'] = ''
+            context['page_title'] = 'Search'
         context['fa'] = 'search'
         return context
-
-
-def tag(request, slug=""):
-    posts = Post.objects.filter(tags__slug=slug).order_by('-pub_date')
-    obj = {
-        'posts': posts,
-        'page_title': slug,
-        'fa':'tag',
-    }
-    return render(request, 'blog/tag.html', obj)
