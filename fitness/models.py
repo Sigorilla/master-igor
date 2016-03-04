@@ -1,6 +1,7 @@
 from django.db import models
-from datetime import datetime
+from django.utils.timezone import now
 import json
+
 
 class Training(models.Model):
 
@@ -17,8 +18,9 @@ class Training(models.Model):
     results = models.TextField()
     day = models.ForeignKey('Day', default=True)
 
-    def getResults(self):
-        return json.loads(self.results);
+    def get_results(self):
+        return json.loads(self.results)
+
 
 class Exercise(models.Model):
 
@@ -33,6 +35,7 @@ class Exercise(models.Model):
     title = models.CharField(default='Exercise', max_length=100, unique=True)
     description = models.TextField(blank=True)
 
+
 class Day(models.Model):
 
     class Meta:
@@ -43,4 +46,4 @@ class Day(models.Model):
     def __unicode__(self):
         return self.datetime.strftime('%d %B %Y %H:%M:%S')
 
-    datetime = models.DateTimeField(default=datetime.now())
+    datetime = models.DateTimeField(default=now())

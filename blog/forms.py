@@ -1,12 +1,13 @@
 from django import forms
 
-from blog.models import *
+from blog.models import Post
+
 
 class PostCreateForm(forms.ModelForm):
 
-  class Meta:
-    model = Post
-    fields = ('title', 'intro', 'post', 'tags', 'active')
-    widgets = {
-      'intro': forms.Textarea(attrs={'rows':4})
-    }
+    class Meta:
+        model = Post
+        fields = ('title', 'intro', 'post', 'tags', 'active')
+        widgets = {
+            'intro': forms.Textarea(attrs={'rows': 4})
+        }
