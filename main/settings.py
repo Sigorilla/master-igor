@@ -9,21 +9,12 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 import dj_database_url
+from config import Config
 
-try:
-    from config import *
-except ImportError:
-    # EMAIL
-    EMAIL_HOST = ''
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_PORT = 25
 
-    # social
-    VK_API_ID = ''
-    VK_API_SECRET = ''
-    DATABASE_URL = ''
-    SECRET_KEY = os.environ['SECRET_KEY']
+config = Config()
+DATABASE_URL = config.get('DATABASE_URL')
+SECRET_KEY = config.get('SECRET_KEY', os.environ.get('SECRET_KEY', ''))
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
