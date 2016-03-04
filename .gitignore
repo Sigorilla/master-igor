@@ -2,8 +2,9 @@
 *.sqlite3
 *.db
 *.sublime-*
-*/migrations/*
-settings.py
+config.json
 *.key
-.idea/
-joinme/
+.idea
+staticfiles
+venv
+.env

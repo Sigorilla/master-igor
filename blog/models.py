@@ -4,6 +4,7 @@ import datetime
 from django.utils import timezone
 from taggit.managers import TaggableManager
 
+
 class Post(models.Model):
 
     class Meta:

@@ -1,0 +1,14 @@
+language: python
+python:
+  - "2.7"
+
+install:
+  - make pip
+
+script:
+  - make validate
+
+branches:
+  only:
+    - master
+    - develop

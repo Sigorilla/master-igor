@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   var get_now = function () {
     // TODO:: add error of network or something else...
-    var url = "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=" + nick + "&api_key=cb7c92d1840e42c12214eb470e5281e0&format=json";
+    var url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=" + nick + "&api_key=cb7c92d1840e42c12214eb470e5281e0&format=json";
     $.getJSON(url)
     .success(function (data) {
       // console.log(data);
@@ -17,7 +17,7 @@ $(document).ready(function () {
         var er;
         try {
           er = (data.error) ? data.message : "Rly?!";
-          if (data.error) 
+          if (data.error)
             nick = prev_nick;
         } catch (err) {
           er = "Something happends wrong.";

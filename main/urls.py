@@ -4,26 +4,26 @@ from django.core.urlresolvers import reverse_lazy
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-  # Examples:
-  # url(r'^$', 'main.views.home', name='home'),
-  url(r'^gsoc/$', 'main.views.gsoc', name='gsoc'),
-  url(r'^scrobbler/$', 'main.views.scrobbler', name='scrobbler'),
-  url(r'^schedule/$', 'main.views.schedule', name='schedule'),
-  url(r'^about/$', 'main.views.home', name='about'),
-  url(r'^about/travel/$', 'main.views.travel', name='travel'),
-  url(r'^base/$', 'main.views.base', name='base'),
-  url(r'^projects/$', 'main.views.projects', name='projects'),
+import views
 
-  url(r'^admin/', include(admin.site.urls)),
+urlpatterns = [
+    # Examples:
+    # url(r'^$', views.home, name='home'),
+    url(r'^gsoc/$', views.gsoc, name='gsoc'),
+    url(r'^scrobbler/$', views.scrobbler, name='scrobbler'),
+    url(r'^schedule/$', views.schedule, name='schedule'),
+    url(r'^about/$', views.home, name='about'),
+    url(r'^about/travel/$', views.travel, name='travel'),
+    url(r'^base/$', views.base, name='base'),
+    url(r'^projects/$', views.projects, name='projects'),
 
-  url(r'^findme/', include('findme.urls')),
-  url(r'^fitness/', include('fitness.urls')),
-  url(r'^', include('blog.urls', namespace='blog')),
-  # url(r'^joinme/', include('joinme.urls', namespace='joinme')),
-  # url(r'^test/', RedirectView.as_view(url=reverse_lazy('joinme:index')), name='redirect-joinme'),
-)
+    url(r'^admin/', include(admin.site.urls)),
 
-handler404 = 'main.views.handler404'
-handler403 = 'main.views.handler403'
-handler500 = 'main.views.handler500'
+    url(r'^fitness/', include('fitness.urls')),
+    url(r'^', include('blog.urls', namespace='blog')),
+    # url(r'^test/', RedirectView.as_view(url=reverse_lazy('joinme:index')), name='redirect-joinme'),
+]
+
+handler404 = views.handler404
+handler403 = views.handler403
+handler500 = views.handler500
