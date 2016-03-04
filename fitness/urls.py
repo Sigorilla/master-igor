@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from fitness.views import FitnessView
+from fitness import views
 
-urlpatterns = patterns('',
-  url(r'^$', FitnessView.as_view(), name='index'),
-  url(r'^save_results/$', 'fitness.views.save_results', name='save_results'),
-)
+urlpatterns = [
+    url(r'^$', views.FitnessView.as_view(), name='index'),
+    url(r'^save_results/$', views.save_results, name='save_results'),
+]

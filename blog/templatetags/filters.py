@@ -113,6 +113,7 @@ def widget_type(field):
         return field.field.widget.__class__.__name__.lower()
     return ''
 
+
 @register.filter(name='trim')
 def trim(value):
     return re.sub(r'\s+', ' ', str(value))

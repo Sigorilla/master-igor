@@ -1,0 +1,7 @@
+{
+  "name": "Sigorilla",
+  "description": "Sigorilla homepage",
+  "repository": "https://github.com/sigorilla/homepage",
+  "keywords": ["python", "django" ],
+  "addons": [ "heroku-postgresql" ]
+}
