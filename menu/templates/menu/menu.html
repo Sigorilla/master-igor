@@ -1,55 +1,35 @@
-<ul class="menu">
-{% for el in menu %}
-  {% if el.for_staff %}
-    {% if user.is_staff %}
-      <li {% if el.has_subitems %}
-        data-submenu="yes"
-      {% endif %} ><a href="{{ el.link }}" {% if el.get_target_display %}
-        target="{{ el.get_target_display }}"
-      {% endif %}>{{ el.name }}</a>
-      {% if el.has_subitems %}
-        <ul class="submenu">
-        {% for subel in el.subitems.all %}
-          {% if subel.for_staff %}
-            {% if user.is_staff %}
-              <li><a href="{{ subel.link }}" {% if el.get_target_display %}
-                target="{{ subel.get_target_display }}"
-              {% endif %}>{{ subel.name }}</a></li>
-            {% endif %}
-          {% else %}
-            <li><a href="{{ subel.link }}" {% if el.get_target_display %}
-              target="{{ subel.get_target_display }}"
-            {% endif %}>{{ subel.name }}</a></li>
-          {% endif %}
-        {% endfor %}
-        </ul>
+<button class="menu-toggle btn btn-default"
+        data-toggle="collapse"
+        data-target="#mainmenu"
+        area-expanded="true"
+        area-controls="mainmenu">
+    <i class="fa fa-bars"></i>
+</button>
+<div class="collapse" id="mainmenu">
+    <ul class="menu">
+    {% for el in menu %}
+        {% if not el.for_staff or el.for_staff and user.is_staff %}
+            <li {% if el.has_subitems %} data-submenu="yes" {% endif %}>
+                <a href="{{ el.link }}"
+                   {% if el.get_target_display %}
+                   target="{{ el.get_target_display }}"
+                   {% endif %}>{{ el.name }}</a>
+                {% if el.has_subitems %}
+                    <ul class="submenu">
+                    {% for subel in el.subitems.all %}
+                        {% if not subel.for_staff or subel.for_staff and user.is_staff %}
+                            <li>
+                                <a href="{{ subel.link }}"
+                                   {% if el.get_target_display %}
+                                   target="{{ subel.get_target_display }}"
+                                   {% endif %}>{{ subel.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                {% endif %} {# end of submenu #}
+            </li>
       {% endif %}
-      </li>
-    {% endif %}
-  {% else %}
-    <li {% if el.has_subitems %}
-      data-submenu="yes"
-    {% endif %} ><a href="{{ el.link }}" {% if el.get_target_display %}
-      target="{{ el.get_target_display }}"
-    {% endif %}>{{ el.name }}</a>
-    {% if el.has_subitems %}
-      <ul class="submenu">
-      {% for subel in el.subitems.all %}
-        {% if subel.for_staff %}
-          {% if user.is_staff %}
-            <li><a href="{{ subel.link }}" {% if el.get_target_display %}
-              target="{{ subel.get_target_display }}"
-            {% endif %}>{{ subel.name }}</a></li>
-          {% endif %}
-        {% else %}
-          <li><a href="{{ subel.link }}" {% if el.get_target_display %}
-            target="{{ subel.get_target_display }}"
-          {% endif %}>{{ subel.name }}</a></li>
-        {% endif %}
-      {% endfor %}
-      </ul>
-    {% endif %}
-    </li>
-  {% endif %}
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
+</div>

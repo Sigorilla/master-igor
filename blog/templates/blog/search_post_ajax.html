@@ -1,13 +1,13 @@
 {% if posts %}
-  <h2>Results</h2>
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-    {% include "blog/post_iterator.html" with posts=posts|slice:":5" %}
+    <h2>Results</h2>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {% include "blog/post_iterator.html" with posts=posts|slice:":5" %}
+        </div>
     </div>
-  </div>
 {% else %}
-<article class="warning">
-  <h2>Warning</h2>
-  <p class="intro">Nothing is found.</p>
-</article>
+    <article class="warning">
+        <h2>Warning</h2>
+        <p class="intro">Nothing is found.</p>
+    </article>
 {% endif %}

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block page %}
-  {% if posts %}
+    {% if posts %}
     <article class="archive tag-detail">
-    {% include "blog/post_iterator.html" with posts=posts %}
+        {% include "blog/post_iterator.html" with posts=posts %}
     </article>
-  {% else %}
+    {% else %}
     <article class="warning">
-      <h2>Warning</h2>
-      <p class="intro">Nothing is found.</p>
+        <h2>Warning</h2>
+        <p class="intro">Nothing is found.</p>
     </article>
-  {% endif %}
+    {% endif %}
 {% endblock page %}

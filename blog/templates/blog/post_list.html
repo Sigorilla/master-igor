@@ -6,13 +6,13 @@
 
 {% for year in by_year %}
 <article class="archive" data-year="{{ year.grouper }}">
-  <h2>{{ year.grouper }}</h2>
-  {% include "blog/post_iterator.html" with posts=year.list %}
+    <h2>{{ year.grouper }}</h2>
+    {% include "blog/post_iterator.html" with posts=year.list %}
 </article>
 {% empty %}
 <article class="warning">
-  <h2>Warning</h2>
-  <p class="intro">Nothing is found.</p>
+    <h2>Warning</h2>
+    <p class="intro">Nothing is found.</p>
 </article>
 {% endfor %}
 

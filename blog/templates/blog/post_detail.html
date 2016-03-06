@@ -3,50 +3,50 @@
 {% load static %}
 
 {% if user.is_authenticated %}
-  {% block head_script %}
-    <script src="{% static "js/tag.js" %}"></script>
-  {% endblock head_script %}
+    {% block head_script %}
+        <script src="{% static "js/tag.js" %}"></script>
+    {% endblock head_script %}
 {% endif %}
 
 {% block page %}
-  {% if post %}
+{% if post %}
     {% if user.is_staff or post.active %}
     <article class="post detail" id="post_{{ post.id }}">
-      <div>
-      <p class="intro">{{ post.intro }}</p>
-      {{ post.post|safe }}
-      </div>
-      {% if post.tags.all %}
-      <p class="tags">
-        <i class="fa fa-tags"></i>
-        {# <code>[ #}
-        {% for tag in post.tags.all %}
-        <a href="{% url 'blog:tag' tag.slug %}" class="btn btn-default btn-xs">{{ tag }}</a>
-        {% endfor %}
-        {# ]</code> #}
-      </p>
-      {% endif %}
-      <p class="pub_date">
-        {% if user.is_staff %}
-        {% if not post.active %}
-        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-danger"><i class="fa fa-exclamation-triangle"></i></a>
+        <div>
+            <p class="intro">{{ post.intro }}</p>
+            {{ post.post|safe }}
+        </div>
+        {% if post.tags.all %}
+        <p class="tags">
+            <i class="fa fa-tags"></i>
+            {# <code>[ #}
+            {% for tag in post.tags.all %}
+            <a href="{% url 'blog:tag' tag.slug %}" class="btn btn-default btn-xs">{{ tag }}</a>
+            {% endfor %}
+            {# ]</code> #}
+        </p>
         {% endif %}
-        <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
-        <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
-        {% endif %}
-        {{ post.pub_date|date:"F d, Y H:i" }}
-      </p>
+        <p class="pub_date">
+            {% if user.is_staff %}
+            {% if not post.active %}
+            <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-danger"><i class="fa fa-exclamation-triangle"></i></a>
+            {% endif %}
+            <a href="{% url 'blog:edit' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-edit"></i></a>
+            <a href="{% url 'blog:delete' post.id %}" class="btn btn-xs btn-default"><i class="fa fa-trash"></i></a>
+            {% endif %}
+            {{ post.pub_date|date:"F d, Y H:i" }}
+        </p>
     </article>
     {% else %}
     <article class="warning">
-      <h2>Warning</h2>
-      <p class="intro">Access denied.</p>
+        <h2>Warning</h2>
+        <p class="intro">Access denied.</p>
     </article>
     {% endif %}
-  {% else %}
+{% else %}
     <article class="warning">
-      <h2>Warning</h2>
-      <p class="intro">Nothing is found.</p>
+        <h2>Warning</h2>
+        <p class="intro">Nothing is found.</p>
     </article>
-  {% endif %}
+{% endif %}
 {% endblock page %}

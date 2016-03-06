@@ -4,7 +4,7 @@
   {% if user.is_staff %}
     <li><a href="{% url 'blog:create' %}">New</a></li>
   {% endif %}
-  <li><a href="{% url 'blog:tags' %}">Tags</a></li>
+  <li><a href="{% url 'blog:index' %}">Blog</a></li>
   <li><a href="{% url 'about' %}">About</a></li>
   {# <li><a href="{% url 'schedule' %}">Schedule</a></li> #}
   <li><a href="{% url 'scrobbler' %}">Scrobbler</a></li>

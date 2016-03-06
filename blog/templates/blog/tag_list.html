@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block page %}
-  <article class="tag-list">
-  {% if tags %}
-    <hr>
-    {% for tag in tags %}
-      <a class="btn btn-default tag-item" href="{% url 'blog:tag' tag.slug %}">
-        {{ tag.name }} 
-        {# <span class="badge">{{ tag.taggit_taggeditem_items.all.count }}</span> #}
-      </a>
-    {% endfor %}
-    <hr>
-  {% else %}
-      <h2>Warning</h2>
-      <p class="intro">Nothing is found.</p>
-  {% endif %}
-  </article>
+<article class="tag-list">
+    {% if tags %}
+        <hr>
+        {% for tag in tags %}
+            <a class="btn btn-default tag-item" href="{% url 'blog:tag' tag.slug %}">
+                {{ tag.name }}
+                {# <span class="badge">{{ tag.taggit_taggeditem_items.all.count }}</span> #}
+            </a>
+        {% endfor %}
+        <hr>
+    {% else %}
+        <h2>Warning</h2>
+        <p class="intro">Nothing is found.</p>
+    {% endif %}
+</article>
 {% endblock page %}

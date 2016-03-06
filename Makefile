@@ -6,12 +6,17 @@ start:
 	. ./tools/scripts/setup.sh
 
 .PHONY: validate
-validate: lint
+validate: lint test
 
 .PHONY: lint
 lint:
 	echo "Linting via PEP8"
 	pep8
+
+.PHONY: test
+test:
+	echo "Testing"
+	python manage.py test
 
 .PHONY: pip
 pip:
