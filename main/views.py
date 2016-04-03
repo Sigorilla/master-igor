@@ -7,7 +7,7 @@ def home(request):
     obj = {
         'page_title': 'Igor Stepanov',
     }
-    return render(request, 'index.html', obj)
+    return render(request, 'vcard_sigorilla.html', obj)
 
 
 def gsoc(request):
