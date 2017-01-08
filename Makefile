@@ -3,7 +3,7 @@ all: start
 
 .PHONY: start
 start:
-	. ./tools/scripts/setup.sh
+	. ./tools/setup.sh
 
 .PHONY: validate
 validate: lint test
@@ -16,7 +16,7 @@ lint:
 .PHONY: test
 test:
 	echo "Testing"
-	python manage.py test
+	python2 manage.py test
 
 .PHONY: pip
 pip:
@@ -24,4 +24,4 @@ pip:
 
 .PHONY: dev
 dev:
-	DEBUG=True python manage.py runserver 5000
+	DEBUG=True python2 manage.py runserver 5000

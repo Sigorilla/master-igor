@@ -18,10 +18,11 @@ RESULT=$( virtualenv --version )
 if [ ${RESULT} ]
 then
     echo "Virtualenv has $RESULT version"
-    virtualenv venv;
+    virtualenv venv --python=python2.7
 else
     echo "Installing virtualenv."
     pip install virtualenv
+    virtualenv venv --python=python2.7
 fi
 
 echo "To activate the virtual environment run following command:"
